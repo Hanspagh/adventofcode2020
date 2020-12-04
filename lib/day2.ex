@@ -19,16 +19,13 @@ defmodule Day2 do
     count =
       password
       |> String.codepoints()
-      |> Enum.count(fn l -> l == letter end)
+      |> Enum.count(& &1 == letter)
     count >= min && count <= max
   end
 
   def fit_new_policy({min, max, letter, password}) do
-    letters = password
-    |> String.codepoints()
-
-    pos1 = Enum.at(letters, min-1) == letter
-    pos2 = Enum.at(letters, max-1) == letter
+    pos1 = String.at(password, min-1) == letter
+    pos2 = String.at(password, max-1) == letter
 
     pos1 != pos2
   end
